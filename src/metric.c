@@ -98,6 +98,8 @@ meter__sample(struct brubeck_metric *metric, brubeck_sample_cb sample, void *opa
 	}
 	pthread_spin_unlock(&metric->lock);
 
+	struct brubeck_backend *backend = (struct brubeck_backend *)opaque;
+	value /= (value_t)backend->sample_freq;
 	sample(metric->key, value, opaque);
 }
 
